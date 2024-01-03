@@ -16,10 +16,10 @@ model User {
   id         String   @id
   nome       String
   email      String   @unique
-  cep        Int
+  cep        BigInt
   endereco   String
   numero     Int
-  contato    Int
+  contato    BigInt
   password   String
   avata      String?
   role       Role     @default(MEMBER)

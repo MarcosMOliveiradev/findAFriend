@@ -10,22 +10,22 @@ services:
           POSTGRES_PASSWORD: abc.123
           POSTGRES_DB: find-a-friend
 
-    app:
-        build: .
-        image: app
-        command: npm rum dev
-        ports:
-          - 3132:3132
-        environment:
-          DATABASE_URL: "postgres://postgres:abc.123@postgres:5432/find-a-friend?schema=public"
-          PORT: 3132
-        volumes:
-          - ./:/findAfriend/
-          - nodemodules:/findAfriend/node_modules
-        links:
-          - postgres
-        depends_on:
-          - postgres
+    # app:
+    #     build: .
+    #     image: app
+    #     command: npm rum dev
+    #     ports:
+    #       - 3132:3132
+    #     environment:
+    #       DATABASE_URL: "postgres://postgres:abc.123@postgres:5432/find-a-friend?schema=public"
+    #       PORT: 3132
+    #     volumes:
+    #       - ./:/findAfriend/
+    #       - nodemodules:/findAfriend/node_modules
+    #     links:
+    #       - postgres
+    #     depends_on:
+    #       - postgres
 
 volumes:
     nodemodules: {}

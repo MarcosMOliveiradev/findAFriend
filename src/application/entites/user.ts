@@ -1,10 +1,6 @@
 import { randomUUID } from "crypto"
 import { Replace } from "./Replace"
-
-enum Role {
-    ORG,
-    MEMBER,
-}
+import { Role } from "@prisma/client"
 
 interface IUser {
     nome: string
@@ -14,8 +10,8 @@ interface IUser {
     numero: number
     contato: number
     password: string
-    avata: string
-    role: Role | string
+    avata?: string
+    role: Role
     created_at: Date
 }
 
@@ -91,19 +87,19 @@ export class User {
         return this.props.password
       }
 
-      public set avata(avata: string) {
+      public set avata(avata: string | undefined) {
         this.props.avata = avata
       }
     
-      public get avata() {
+      public get avata(): string | undefined {
         return this.props.avata
       }
 
-      public set role(role: Role | "MEMBER") {
+      public set role(role: Role) {
         this.props.role = role
       }
     
-      public get role(): Role | string {
+      public get role() {
         return this.props.role
       }
 }
