@@ -8,7 +8,7 @@ interface IPet {
     porte: string
     energia: string
     independencia: string
-    fotos?: string[]
+    fotos?: string[] | null
     requisitos?: string
     user: string
     created_at: Date
@@ -78,7 +78,7 @@ export class Pet {
         return this.props.independencia
       }
 
-      public set fotos(fotos: string[] | undefined) {
+      public set fotos(fotos: string[] | undefined | null) {
         this.props.fotos = fotos
       }
     

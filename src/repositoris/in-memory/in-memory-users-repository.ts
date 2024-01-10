@@ -1,4 +1,3 @@
-// import { User } from "@/application/entites/user";
 import { User } from "@/application/entites/user";
 import { UserRepository } from "../user-repository";
 import { Prisma } from "@prisma/client";
@@ -15,9 +14,21 @@ export class InMemoryUsersRepository extends UserRepository {
         return user
     }
 
+    async findById(id: string) {
+        const user = await this.item.find((itens) => itens.id === id);
+        if (!user) {
+            return null
+        }
+
+        return user
+    }
+
     async create(data: Prisma.UserCreateInput) {
-        const created = {
-            id: data.id,
+        if (data.role === undefined) {
+            throw new Error('erro de permissão')
+        }
+
+        const created = await new User({
             nome: data.nome,
             email: data.email,
             cep: data.cep,
@@ -27,8 +38,7 @@ export class InMemoryUsersRepository extends UserRepository {
             password: data.password,
             avata: data.avata,
             role: data.role,
-            created_at: new Date(),
-        }
+        })
 
         this.item.push(created)
     }

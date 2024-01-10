@@ -44,6 +44,10 @@ export class CreateUser {
             role,
         })
 
+        if (user.role === undefined) {
+            throw new Error('erro de permissão')
+        }
+
         await this.userRepository.create(user)
 
         return {

@@ -5,12 +5,12 @@ import { Role } from "@prisma/client"
 interface IUser {
     nome: string
     email: string
-    cep: number
+    cep: number | bigint
     endereco: string
     numero: number
-    contato: number
+    contato: number | bigint
     password: string
-    avata?: string
+    avata?: string | null
     role: Role
     created_at: Date
 }
@@ -47,11 +47,11 @@ export class User {
         return this.props.email
       }
 
-      public set cep(cep: number) {
+      public set cep(cep: number | bigint) {
         this.props.cep = cep
       }
     
-      public get cep() {
+      public get cep(): number | bigint {
         return this.props.cep
       }
 
@@ -71,11 +71,11 @@ export class User {
         return this.props.numero
       }
 
-      public set contato(contato: number) {
+      public set contato(contato: number | bigint) {
         this.props.contato = contato
       }
     
-      public get contato() {
+      public get contato(): number | bigint {
         return this.props.contato
       }
 
@@ -87,11 +87,11 @@ export class User {
         return this.props.password
       }
 
-      public set avata(avata: string | undefined) {
+      public set avata(avata: string | undefined | null) {
         this.props.avata = avata
       }
     
-      public get avata(): string | undefined {
+      public get avata(): string | undefined | null {
         return this.props.avata
       }
 
