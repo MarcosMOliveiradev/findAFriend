@@ -15,7 +15,7 @@ describe('Register Use Case', () => {
     petRepository = new InMemoryPetReposotory()
     sut = new CreatePet(petRepository, userRepository)
   })
-  it('should be able created a pet', async () => {
+  it('should be able create a pet', async () => {
     const user = new User({
       nome: 'Marcos',
       email: 'marcos@marcos22.com',
@@ -43,7 +43,7 @@ describe('Register Use Case', () => {
     expect(createdPet.id).toEqual(expect.any(String))
   })
 
-  it('should not be able created a pet', async () => {
+  it('should not be able create a pet', async () => {
     const user = new User({
       nome: 'Marcos',
       email: 'marcos@marcos22.com',
