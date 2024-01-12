@@ -1,6 +1,8 @@
 import { PetRepository } from "@/repositoris/pet-repository"
 import { Pet } from "../entites/pet"
 import { UserRepository } from "@/repositoris/user-repository"
+import { InvalidCredentialsError } from "./Errors/invalid-credentials-error"
+import { userDidNotExistsError } from "./Errors/user-did-not-exists-error"
 
 interface ICreatePet {
     nome: string
@@ -22,11 +24,18 @@ export class CreatePet {
         const userExist = await this.userRepository.findById(user)
 
         if (userExist === null || userExist === undefined) {
-            throw new Error('Usuario não existe!')
+            throw new userDidNotExistsError()
+        }
+
+        if (userExist.role !== 'ORG') {
+            throw new InvalidCredentialsError()
         }
 
         const createdPet = await new Pet({ nome, descricao, idade, porte, energia, independencia, fotos, requisitos, user })
         
         await this.petRepository.created(createdPet)
+        return {
+            createdPet
+        }
     }
 }

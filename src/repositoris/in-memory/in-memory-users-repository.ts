@@ -41,5 +41,6 @@ export class InMemoryUsersRepository extends UserRepository {
         })
 
         this.item.push(created)
+        return created
     }
 }

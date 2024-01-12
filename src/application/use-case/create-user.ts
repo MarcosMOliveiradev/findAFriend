@@ -2,6 +2,8 @@ import { UserRepository } from "@/repositoris/user-repository"
 import { User } from "../entites/user"
 import { hash } from "bcrypt"
 import { Role } from "@prisma/client"
+import { InvalidCredentialsError } from "./Errors/invalid-credentials-error"
+import { userAlreadyExistsError } from "./Errors/user-already-exists-error"
 
 interface ICreateUserRequest {
     nome: string
@@ -28,7 +30,7 @@ export class CreateUser {
         const isEmailExist = await this.userRepository.findByEmail(email)
 
         if (isEmailExist) {
-            throw new Error('Email ja cadastrado!')
+            throw new userAlreadyExistsError()
         }
 
         const password_hash = await hash(password, 6)
@@ -45,7 +47,7 @@ export class CreateUser {
         })
 
         if (user.role === undefined) {
-            throw new Error('erro de permissão')
+            throw new InvalidCredentialsError()
         }
 
         await this.userRepository.create(user)

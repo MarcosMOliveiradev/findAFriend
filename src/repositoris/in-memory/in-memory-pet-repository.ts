@@ -18,5 +18,6 @@ export class InMemoryPetReposotory extends PetRepository {
         })
 
         this.item.push(created)
+        return created
     }
 }

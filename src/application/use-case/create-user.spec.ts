@@ -34,8 +34,6 @@ describe('Register Use Case', () => {
   })
 
   it('should not be able to register with same email twice', async () => {
-    const email = 'marcos@marcos.com'
-
     await sut.create({
       nome: 'Marcos',
       email: 'marcos@marcos22.com',
