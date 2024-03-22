@@ -3,8 +3,14 @@ import { UserRepository } from "../user-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaUserRepository extends UserRepository {
-    async create(user: User) {
-        await prisma.user.create({
+    findByEmail(email: string): Promise<User | null> {
+        throw new Error("Method not implemented.");
+    }
+    findById(id: string): Promise<User | null> {
+        throw new Error("Method not implemented.");
+    }
+    async create(user: User): Promise<User> {
+        const dados = await prisma.user.create({
             data: {
                 id: user.id,
                 nome: user.nome,
@@ -19,6 +25,8 @@ export class PrismaUserRepository extends UserRepository {
                 created_at: new Date(),
             }
         })
+
+        return dados
     }
 
 }

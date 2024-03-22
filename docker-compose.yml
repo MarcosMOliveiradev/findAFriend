@@ -4,7 +4,7 @@ services:
   api-solid-pg:
     image: bitnami/postgresql
     ports:
-      - 5432:5432
+      - 3339:5432
     environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: abc.123
@@ -18,7 +18,7 @@ services:
     #       - 3132:3132
     #     environment:
     #       DATABASE_URL: "postgres://postgres:abc.123@postgres:5432/find-a-friend?schema=public"
-    #       PORT: 3132
+    #       PORT: 3339
     #     volumes:
     #       - ./:/findAfriend/
     #       - nodemodules:/findAfriend/node_modules
